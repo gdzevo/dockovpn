@@ -1,6 +1,6 @@
-FROM alpine:3.14.1
+FROM alpine:latest
 
-LABEL maintainer="Alexander Litvinenko <array.shift@yahoo.com>"
+#LABEL maintainer="Alexander Litvinenko <array.shift@yahoo.com>"
 
 # System settings. User normally shouldn't change these parameters
 ENV APP_NAME Dockovpn
@@ -19,7 +19,7 @@ COPY scripts .
 COPY config ./config
 COPY VERSION ./config
 
-RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip dumb-init && \
+RUN apk add --no-cache openvpn easy-rsa bash iptables netcat-openbsd zip dumb-init && \
     ln -s /usr/share/easy-rsa/easyrsa /usr/bin/easyrsa && \
     mkdir -p ${APP_PERSIST_DIR} && \
     cd ${APP_PERSIST_DIR} && \
@@ -33,7 +33,7 @@ RUN apk add --no-cache openvpn easy-rsa bash netcat-openbsd zip dumb-init && \
     cp config/server.conf /etc/openvpn/server.conf
 
 
-EXPOSE 1194/udp
+EXPOSE 1194/tcp
 EXPOSE 8080/tcp
 
 VOLUME [ "/opt/Dockovpn_data" ]

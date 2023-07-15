@@ -21,7 +21,7 @@
 Докеризированный VPN сервер, который работает прямо из коробки, не требует долгой настройки и постоянного места на жестком диске. Стартует за 2 секунды. Высокий уровень безопасности. Чтобы запустить, скопируйте и вставьте код ниже в окне терминала вашего сервера и следуйте инструкциям:
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
--p 1194:1194/udp -p 80:8080/tcp \
+-p 1194:1194/tcp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
@@ -59,7 +59,7 @@ https://hub.docker.com/r/alekslitvinenk/openvpn
 DOCKOVPN_CONFIG_PORT=<custom port>
 DOCKOVPN_TUNNEL_PORT=<custom port>
 docker run -it --rm --cap-add=NET_ADMIN \
--p $DOCKOVPN_TUNNEL_PORT:1194/udp -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
+-p $DOCKOVPN_TUNNEL_PORT:1194/tcp -p $DOCKOVPN_CONFIG_PORT:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
 -e HOST_CONF_PORT="$DOCKOVPN_CONFIG_PORT" \
 -e HOST_TUN_PORT="$DOCKOVPN_TUNNEL_PORT" \
@@ -89,7 +89,7 @@ docker run -it --rm --cap-add=NET_ADMIN \
 Скопируйте код ниже и вставьте его в консоли вашего сервера:<br>
 ```bash
 docker run -it --rm --cap-add=NET_ADMIN \
--p 1194:1194/udp -p 80:8080/tcp \
+-p 1194:1194/tcp -p 80:8080/tcp \
 -e HOST_ADDR=$(curl -s https://api.ipify.org) \
 --name dockovpn alekslitvinenk/openvpn
 ```
